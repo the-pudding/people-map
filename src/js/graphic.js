@@ -13,13 +13,13 @@ function swapText(d) {
     ['get', 'city'],
     {
       'font-scale': 0.75,
-      'text-font': ['literal', ['Atlas Grotesk Black', 'Roboto Mono Regular']],
+      'text-font': ['literal', ['Roboto Mono Regular', 'Rubik Black']],
     },
   ]);
 }
 
 function addLocation() {
-  ['small', 'med-small', 'med'].forEach(swapText);
+  ['med', 'med-small', 'small'].forEach(swapText);
 }
 
 function setupMap() {
