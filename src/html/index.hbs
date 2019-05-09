@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang='en' data-version='{{timestamp}}'>
+
+<head>
+
+
+
+	{{> base/meta}}
+
+	<link href='assets/css/mapbox-gl.css' rel='stylesheet' />
+	<link inline rel='stylesheet' href='bundle.css' />
+
+	{{> base/font}}
+
+
+	<script inline src='head.js'></script>
+
+	{{> base/analytics }}
+
+</head>
+
+<body>
+
+	{{> base/header 'sticky'}}
+
+	<main id='content'>
+
+		<figure id='map'></figure>
+
+
+	</main>
+
+	{{> base/footer }}
+
+
+	<script src='{{basepath}}assets/scripts/d3.v5.9.1.min.js'></script>
+	<script src='assets/scripts/mapbox-gl.js'></script>
+	<script src='main.js?version={{timestamp}}' async></script>
+</body>
+
+</html>
