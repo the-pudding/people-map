@@ -1,10 +1,31 @@
 <a href='#content' class='skip-to-main'>Skip to main content</a>
 
-<header class='{{#ifEquals this 'sticky'}}is-sticky{{/ifEquals}}{{#ifEquals this 'sticky-dark'}}is-sticky is-dark{{/ifEquals}}'>
+
+<div class='header__micro'>
+	<p><strong>A People Map of the US</strong>, where city names are replaced by their most Wikipedia’ed resident</p>
+	<button class='micro__toggle'>
+		<span class='toggle--down'>
+			<em>Info</em>
+			<img inline src='chevron-down.svg'>
+		</span>
+	</button>
+</div>
+
+<header class='is-visible'>
 	<a href='https://pudding.cool' target='_blank' class='logo'>
 		<img inline src='pudding/wordmark.svg'>
 	</a>
-	 {{#ifEquals this 'sticky'}} {{> base/sticky }} {{/ifEquals}}
-	 {{#ifEquals this 'sticky-dark'}} {{> base/sticky }} {{/ifEquals}}
+	<section class='header__title'>
+		<h1><strong>A People Map of the US</strong>, where city names are replaced by their most <a
+				href='https://en.wikipedia.org' target='_blank'>Wikipedia’ed</a> resident</h1>
+		<p class='small'>(by average pageviews)</p>
+	</section>
+	<section class='header__note'>
+		<p class='small'><strong>Note:</strong> any person on Wikipedia is considered, including those connected to and
+			victims of
+			criminal acts. See more about <button>our data and method.</button></p>
+	</section>
+	<button class='header__toggle'>
+		<span class='toggle--up'><img inline src='chevron-up.svg'></span>
+	</button>
 </header>
-

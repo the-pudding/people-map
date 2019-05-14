@@ -36,7 +36,7 @@ function init() {
   // setup resize event
   window.addEventListener('resize', debounce(resize, 150));
   // setup sticky header menu
-  setupStickyHeader();
+  // setupStickyHeader();
   // kick off graphic code
   graphic.init();
   // load footer stories

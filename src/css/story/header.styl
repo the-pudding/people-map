@@ -2,10 +2,19 @@ header
 	z-index set-index('overlay')
 	position absolute
 	top 0
-	left 0
-	width 100%
-	background-color $white
+	left 50%
+	width 90%
+	max-width 40rem
+	background-color $off-black
 	font-family $sans
+	padding 0 2rem
+	border-radius 6px
+	transform translate(-50%, -100% - 6rem)
+	transition transform 500ms ease-in-out
+
+	&.is-visible
+		transform translate(-50%, -3px)
+
 
 	a.logo
 		display block
@@ -14,144 +23,107 @@ header
 		margin 1rem auto
 
 		svg
-			fill $off-black
+			fill $gray
 			display block
 			width 100%
 	
-header.is-sticky
-	position fixed
-	transform translate3d(0,0,0)
-	background-color $white
-	box-shadow 0 0 7px 1px $gray-light
+	.header__title
+		font-weight 500
+		text-align center
+		color $gray-light
+
+		strong
+			color $white
+		
+		a, a:visited
+			color $gray-light
+			border-bottom 1px solid currentColor
+
+		h1
+			margin 0
+			line-height 1.25
+		
+		p
+			font-weight 400
+			margin 0
+			margin-top 0.5rem
+	
+.header__note
+	margin-top 3rem
+	color $off-white
+	button
+		background none
+		color currentColor
+		font-size 1em
+		border-bottom 1px solid currentColor
+
+button.header__toggle
+	display block
+	background $bg
+	color $gray
+	width 3rem
 	height 3rem
-	display flex
-	align-items center
-	
-	a.logo
-		margin 0 auto
-	
-	.header__toggle
-		position fixed
-		transform translate3d(0,0,0)
-		top 0
-		right 0
-		padding 0.75rem
-		cursor pointer
-		line-height 1
-		z-index set-index(overlay)
-		border none 
-		background-color transparent
-		svg
-			stroke $off-black
-		
-		span
-			&:first-of-type
-				display block
-			&:last-of-type
-				display none
-		
-		&.is-visible span
-			&:first-of-type
-				display none
-			&:last-of-type
-				display block
-
-			svg
-				stroke $off-white
-
-	.header__menu
-		position fixed
-		top 0
-		right 0
-		transform translateX(100%)
-		height 100vh
-		width 100%
-		max-width 30rem
-		padding 1rem 1.5rem
-		background-color $off-black
-		color $off-white
-		z-index set-index(overlay)
-		transition transform 200ms ease-in-out
-		+mq('bp-3')
-			border-left 1px solid $gray-dark
-
-		&.is-visible
-			transform translateX(0)
-
-		a
-			color $off-white
-			border-bottom 1px solid $off-white
-			&:hover
-				color $gray-light
-
-		.menu__links
-			display flex
-			flex-wrap wrap
-			flex-direction row
-			+mq('bp-4')
-				flex-direction column
-			li
-				font-family $sans-display
-				font-weight 700
-				text-transform uppercase
-				margin-bottom 0.5em
-				margin-right 0.5em
-				set-type-size(large)
-				+mq('bp-3')
-					set-type-size(x-large)
-
-		a.patreon-link
-			font-family $sans-display
-			font-weight 700
-			text-transform uppercase
-			border none
-			background-color $off-white
-			color $off-black
-			padding 0.5em 0.75em
-			&:hover
-				opacity 0.75
-
-	.menu__patrons
-		ul
-			display flex
-			flex-wrap wrap
-		li
-			&:after
-				display inline
-				content ','
-				margin-right 0.25em
-			&:last-of-type:after
-				content '.'
-		// li
-		// 	set
-
-// dark color version
-header.is-sticky.is-dark
-	background-color $off-black
-	box-shadow 0 0 7px 1px $gray-dark
-
+	margin 0 auto
+	position absolute
+	left 50%
+	bottom 0
+	transform translate(-50%, 50%)
+	border-radius 50%
 	svg
-		path
-			fill $off-white
+		display block
+		width 75%
+		height 75%	
+		stroke $primary
+		margin-left 12.5%
 
-	.header__menu
-		background-color $white
-		color $off-black
-		+mq('bp-3')
-			border-left 1px solid $gray-light
+.header__micro
+	z-index set-index('overlay')
+	position absolute
+	top 0
+	left 50%
+	width 90%
+	max-width 30rem
+	background-color $off-black
+	font-family $sans
+	padding 0 2rem
+	border-radius 6px
+	transform translate(-50%, -100% - 6rem)
+	transform translate(-50%, -3px)
+	// transition transform 200ms 500ms ease-in-out
+	
+	p
+		font-weight 500
+		text-align center
+		color $gray-light
+	
+	strong
+		color $white
 
-	a
-		color $off-black
-		border-bottom 1px solid $off-black
-		&:hover
-			color $gray-dark
+	&.is-visible
+		transform translate(-50%, -3px)
 
-	.header__toggle
-		svg
-			stroke $off-white
-		
-		&.is-visible span
-			svg
-				stroke $off-black
-
-
+button.micro__toggle
+	display block
+	background $bg
+	color $primary
+	width 3rem
+	height 3rem
+	margin 0 auto
+	position absolute
+	left 50%
+	bottom 0
+	transform translate(-50%, 50%)
+	border-radius 50%
+	set-type-size(small, false)
+	line-height 1
+	text-transform lowercase
+	em
+		display inline-block
+		font-style normal
+		transform translateY(25%)
+	svg
+		display block
+		width 75%
+		height 75%	
+		stroke $primary
+		margin-left 12.5%

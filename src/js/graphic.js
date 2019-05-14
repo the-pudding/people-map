@@ -1,5 +1,22 @@
 /* global d3 mapboxgl */
+const $header = d3.select('header');
+const $micro = d3.select('.header__micro');
+const $buttonUp = $header.select('.header__toggle');
+const $buttonDown = $micro.select('.micro__toggle');
+
+let headerDone = false;
 let map = null;
+
+function showHeader() {
+  $header.classed('is-visible', true);
+  $micro.classed('is-visible', false);
+}
+
+function hideHeader() {
+  headerDone = true;
+  $header.classed('is-visible', false);
+  $micro.classed('is-visible', true);
+}
 
 function resize() {}
 
@@ -34,8 +51,20 @@ function setupMap() {
   map.on('load', addLocation);
 }
 
+function setupUI() {
+  $buttonUp.on('click', hideHeader);
+  $buttonDown.on('click', showHeader);
+  d3.timeout(() => {
+    if (!headerDone) {
+      headerDone = true;
+      hideHeader();
+    }
+  }, 10000);
+}
+
 function init() {
   setupMap();
+  setupUI();
 }
 
 export default { init, resize };
