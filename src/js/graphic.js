@@ -8,6 +8,7 @@ const $marker = d3.select('#marker');
 const $filterUl = d3.select('.filter-list');
 
 const CATS = [
+  { id: 'all', text: 'Show All' },
   { id: 'cat_filmtv', text: 'Film/TV' },
   { id: 'cat_sports', text: 'Sports' },
   { id: 'cat_music', text: 'Music' },
@@ -25,7 +26,8 @@ let marker = null;
 
 function updateFilter(d) {
   LAYER_GROUPS.forEach(layer => {
-    map.setFilter(layer, ['==', d.id, 'TRUE']);
+    if (d.id === 'all') map.setFilter(layer, null);
+    else map.setFilter(layer, ['==', d.id, 'TRUE']);
   });
   $filterUl.classed('is-visible', false);
 }
