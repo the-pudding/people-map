@@ -71,3 +71,31 @@ footer
 		background $bg
 		border-radius 50%
 		cursor pointer
+
+ul.filter-list
+	position fixed
+	bottom 0
+	right 0
+	z-index set-index('overlay') - 1
+	background $bg
+	padding 1rem 1.5rem 1rem 1rem
+	border-radius 6px
+	transform translate(6px, 100% + 6px)
+	transition transform 250ms ease-in-out
+	&.is-visible
+		transform translate(6px, 12px)
+
+li
+	padding 0.25rem 0
+	button
+		set-type-size(small, false)
+		line-height 1
+		padding 0
+		background transparent
+		max-width 100%
+		font-weight 500
+		margin 0
+		color $primary
+		&:hover
+			color $fg
+	

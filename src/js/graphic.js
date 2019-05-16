@@ -3,12 +3,32 @@ const $header = d3.select('header');
 const $micro = d3.select('.header__micro');
 const $buttonUp = $header.select('.header__toggle');
 const $buttonDown = $micro.select('.micro__toggle');
+const $buttonFilter = d3.select('.footer__filter');
 const $marker = d3.select('#marker');
+const $filterUl = d3.select('.filter-list');
+
+const CATS = [
+  { id: 'cat_filmtv', text: 'Film/TV' },
+  { id: 'cat_sports', text: 'Sports' },
+  { id: 'cat_music', text: 'Music' },
+  { id: 'cat_culture', text: 'Culture' },
+  { id: 'cat_politics', text: 'Politics' },
+  { id: 'cat_crime', text: 'Crime' },
+  { id: 'cat_lawandorder', text: 'Law & Order' },
+  { id: 'cat_misc', text: 'Misc' },
+];
 
 const LAYER_GROUPS = ['med', 'med-small', 'small'];
 let headerDone = false;
 let map = null;
 let marker = null;
+
+function updateFilter(d) {
+  LAYER_GROUPS.forEach(layer => {
+    map.setFilter(layer, ['==', d.id, 'TRUE']);
+  });
+  $filterUl.classed('is-visible', false);
+}
 
 function updateMarker(feature) {
   const [lng, lat] = feature.geometry.coordinates;
@@ -26,6 +46,11 @@ function hideHeader() {
   headerDone = true;
   $header.classed('is-visible', false);
   $micro.classed('is-visible', true);
+}
+
+function toggleFilter() {
+  const visible = $filterUl.classed('is-visible');
+  $filterUl.classed('is-visible', !visible);
 }
 
 function handleClick(e) {
@@ -84,6 +109,7 @@ function setupMap() {
 function setupUI() {
   $buttonUp.on('click', hideHeader);
   $buttonDown.on('click', showHeader);
+  $buttonFilter.on('click', toggleFilter);
   map.on('click', handleClick);
   d3.timeout(() => {
     if (!headerDone) hideHeader();
@@ -94,10 +120,23 @@ function setupMarker() {
   marker = new mapboxgl.Marker($marker.node());
 }
 
+function setupFilter() {
+  const h = d3.select('footer').node().offsetHeight;
+  $filterUl
+    .style('bottom', `${h}px`)
+    .selectAll('li')
+    .data(CATS)
+    .join('li')
+    .append('button')
+    .text(d => d.text)
+    .on('click', updateFilter);
+}
+
 function init() {
   setupMap();
   setupUI();
   setupMarker();
+  setupFilter();
 }
 
 export default { init, resize };
