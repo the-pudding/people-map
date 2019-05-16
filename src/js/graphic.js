@@ -5,6 +5,8 @@ const $buttonUp = $header.select('.header__toggle');
 const $buttonDown = $micro.select('.micro__toggle');
 const $buttonFilter = d3.select('.footer__filter');
 const $marker = d3.select('#marker');
+const $about = d3.select('#about');
+const $buttonAbout = d3.select('.btn--about');
 const $filterUl = d3.select('.filter-list');
 
 const CATS = [
@@ -53,6 +55,11 @@ function hideHeader() {
 function toggleFilter() {
   const visible = $filterUl.classed('is-visible');
   $filterUl.classed('is-visible', !visible);
+}
+
+function toggleAbout() {
+  const visible = $about.classed('is-visible');
+  $about.classed('is-visible', !visible);
 }
 
 function handleClick(e) {
@@ -112,6 +119,8 @@ function setupUI() {
   $buttonUp.on('click', hideHeader);
   $buttonDown.on('click', showHeader);
   $buttonFilter.on('click', toggleFilter);
+  $about.on('click', toggleAbout);
+  $buttonAbout.on('click', toggleAbout);
   map.on('click', handleClick);
   d3.timeout(() => {
     if (!headerDone) hideHeader();
