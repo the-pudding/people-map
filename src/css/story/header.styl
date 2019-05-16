@@ -6,7 +6,6 @@ header
 	width 90%
 	max-width 40rem
 	background-color $off-black
-	font-family $sans
 	padding 0 2rem
 	border-radius 6px
 	transform translate(-50%, -100% - 6rem)
@@ -16,7 +15,7 @@ header
 		transform translate(-50%, -3px)
 
 
-	a.logo
+	a.wordmark
 		display block
 		border none
 		max-width 9rem
@@ -127,3 +126,31 @@ button.micro__toggle
 		height 75%	
 		stroke $primary
 		margin-left 12.5%
+
+a.logo
+	display block
+	position absolute
+	top 1rem
+	left 1rem
+	z-index set-index('overlay')
+	width 3rem
+	border none
+	opacity 1
+	.st0
+		fill $primary
+	.st1
+		fill darken($primary, 25)
+
+.btn--about
+	z-index set-index('overlay')
+	position absolute
+	top 1rem
+	right 1rem
+	background-color $off-black
+	color $primary
+	font-weight 700
+	line-height 1
+	width 2rem
+	height 2rem
+	border-radius 50%
+	border 2px solid $primary
