@@ -3,7 +3,7 @@ const $header = d3.select('header');
 const $micro = d3.select('.header__micro');
 const $buttonUp = $header.select('.header__toggle');
 const $buttonDown = $micro.select('.micro__toggle');
-const $buttonFilter = d3.select('.footer__filter');
+// const $buttonFilter = d3.select('.footer__filter');
 const $marker = d3.select('#marker');
 const $about = d3.select('#about');
 const $buttonAbout = d3.select('.btn--about');
@@ -25,20 +25,53 @@ const LAYER_GROUPS = ['med', 'med-small', 'small'];
 let headerDone = false;
 let map = null;
 let marker = null;
+let mobile = false;
+let currentPerson = null;
 
 function updateFilter(d) {
   LAYER_GROUPS.forEach(layer => {
     if (d.id === 'all') map.setFilter(layer, null);
     else map.setFilter(layer, ['==', d.id, 'TRUE']);
   });
+
+  if (d.id === 'all') map.setFilter('people-map-4ngixe', null);
+  else map.setFilter('people-map-4ngixe', ['==', d.id, 'TRUE']);
+
   $filterUl.classed('is-visible', false);
 }
 
+function findHighlight(text) {
+  const max = 80;
+  const isA = text.indexOf(' is a ');
+  const wasA = text.indexOf(' was a ');
+  const isAn = text.indexOf(' is an ');
+  const wasAn = text.indexOf(' was an ');
+  const isThe = text.indexOf(' is the ');
+  const wasThe = text.indexOf(' was the ');
+  if (isA > -1 && isA < max) return isA;
+  if (isAn > -1 && isAn < max) return isAn;
+  if (wasA > -1 && wasA < max) return wasA;
+  if (wasAn > -1 && wasAn < max) return wasAn;
+  if (isThe > -1 && isThe < max) return isThe;
+  if (wasThe > -1 && wasThe < max) return wasThe;
+  return false;
+}
+
 function updateMarker(feature) {
-  const [lng, lat] = feature.geometry.coordinates;
-  const { extract } = feature.properties;
-  marker.setLngLat([lng, lat]).addTo(map);
-  $marker.text(extract);
+  // const [lng, lat] = feature.geometry.coordinates;
+  const { extract, name_clean } = feature.properties;
+  if (currentPerson !== name_clean) {
+    currentPerson = name_clean;
+    const index = findHighlight(extract);
+    let html = extract;
+    if (index) {
+      const before = extract.substring(0, index);
+      const after = extract.substring(index, extract.length);
+      html = `<strong>${before}</strong>${after}`;
+    }
+    $marker.html(html);
+  }
+  // marker.setLngLat([lng, lat]).addTo(map);
 }
 
 function showHeader() {
@@ -62,7 +95,7 @@ function toggleAbout() {
   $about.classed('is-visible', !visible);
 }
 
-function handleClick(e) {
+function handleMove(e) {
   const features = map.queryRenderedFeatures(e.point);
   const visible = features.filter(
     d => d.layer.layout && d.layer.layout.visibility === 'visible'
@@ -73,7 +106,9 @@ function handleClick(e) {
   }
 }
 
-function resize() {}
+function resize() {
+  mobile = false;
+}
 
 function swapText(id) {
   map.setLayoutProperty(id, 'text-field', [
@@ -118,10 +153,10 @@ function setupMap() {
 function setupUI() {
   $buttonUp.on('click', hideHeader);
   $buttonDown.on('click', showHeader);
-  $buttonFilter.on('click', toggleFilter);
+  // $buttonFilter.on('click', toggleFilter);
   $about.on('click', toggleAbout);
   $buttonAbout.on('click', toggleAbout);
-  map.on('click', handleClick);
+  map.on('mousemove', handleMove);
   d3.timeout(() => {
     if (!headerDone) hideHeader();
   }, 10000);
@@ -129,6 +164,9 @@ function setupUI() {
 
 function setupMarker() {
   marker = new mapboxgl.Marker($marker.node());
+  const h = d3.select('footer').node().offsetHeight;
+  const b = mobile ? h : 0;
+  $marker.style('bottom', `${b}px`);
 }
 
 function setupFilter() {
@@ -147,7 +185,7 @@ function init() {
   setupMap();
   setupUI();
   setupMarker();
-  setupFilter();
+  // setupFilter();
 }
 
 export default { init, resize };

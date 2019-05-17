@@ -14,62 +14,32 @@ main
 	height 100%
 
 .mapboxgl-ctrl-bottom-right
-	display none
+	position fixed
+	left 0
+	bottom 0
+	right auto
+	a
+		border none
+
+.mapboxgl-ctrl-bottom-left
+	transform translateY(-75%)
+	a
+		border none
 
 #marker
 	margin 0
-	background $bg
+	background rgba($bg, 0.9)
 	font-family $sans
 	set-type-size(small, true)
-	line-height 1.35
+	line-height 1.5
 	max-width 20rem
-	padding 0.5rem
+	padding 0.75rem
 	border-radius 6px
-
-#about
-	position absolute
-	top 0
-	left 0
-	width 100%
-	height 100%
-	background-color rgba($bg, 0.85)
-	z-index set-index('overlay') + 1
-	cursor pointer
-	display none
-	&.is-visible
-		display block
-
-	.about__inner
-		padding 2rem 1rem 1rem 1rem
-		background-color $bg
-		position absolute
-		top 50%
-		left 50%
-		width 90%
-		max-width 30rem
-		transform translate(-50%, -50%)
-		border-radius 6px
-		// box-shadow 0 0 2px 1px $primary
-		border 2px solid $primary
-		
-	h4
-		font-weight 500
-		margin 0
-	a
-		font-weight 500
-	p
-		set-type-size(small, true)
-
-	.btn--about
-		position absolute
-		top 1rem
-		right 1rem
-		width 2rem
-		height 2rem
-		border-radius 50%
-		svg
-			stroke $primary
-			width 1rem
-			vertical-align middle
-			line
-				stroke-width 3px
+	position fixed
+	bottom 0
+	top auto
+	left 50%
+	transform translate(-50%, 3px)
+	strong
+		font-weight 700
+		color $secondary
