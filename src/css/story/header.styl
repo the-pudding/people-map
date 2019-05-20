@@ -148,7 +148,6 @@ button.micro__toggle
 		margin-left 12.5%
 
 a.logo
-	display block
 	position absolute
 	top 1rem
 	left 1rem
@@ -156,6 +155,9 @@ a.logo
 	width 3rem
 	border none
 	opacity 1
+	display none
+	+mq('bp-4')
+		display block
 	.st0
 		fill $primary
 	.st1
