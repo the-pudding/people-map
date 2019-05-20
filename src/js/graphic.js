@@ -5,6 +5,7 @@ const $main = d3.select('main');
 const $header = d3.select('header');
 const $footer = d3.select('footer');
 const $micro = d3.select('.header__micro');
+const $buttonNote = $header.select('.header__note button');
 const $buttonUp = $header.select('.header__toggle');
 const $buttonDown = $micro.select('.micro__toggle');
 // const $buttonFilter = d3.select('.footer__filter');
@@ -181,6 +182,7 @@ function setupUI() {
   // $buttonFilter.on('click', toggleFilter);
   $about.on('click', toggleAbout);
   $buttonAbout.on('click', toggleAbout);
+  $buttonNote.on('click', toggleAbout);
   map.on(touch ? 'touchend' : 'mousemove', handleMove);
 
   if (touch) {
