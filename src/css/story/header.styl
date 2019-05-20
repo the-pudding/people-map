@@ -3,7 +3,7 @@ header
 	position absolute
 	top 0
 	left 50%
-	width 90%
+	width 100%
 	max-width 40rem
 	background-color $off-black
 	padding 0 2rem
@@ -41,16 +41,33 @@ header
 		h1
 			margin 0
 			line-height 1.25
+			set-type-size(large, false)
+			+mq('bp-3')
+				set-type-size(x-large, false)
+			+mq('bp-5')
+				set-type-size(xx-large, false)
 		
 		p
 			font-weight 400
 			margin 0
 			margin-top 0.5rem
+			set-type-size(x-small, false)
+			line-height 1.4
+			+mq('bp-3')
+				set-type-size(small, false)
 	
 .header__note
-	margin-top 3rem
+	margin-top 2rem
 	color $off-white
+	+mq('bp-3')
+		margin-top 3rem
+	p
+		set-type-size(x-small, false)
+		line-height 1.4
+		+mq('bp-3')
+			set-type-size(small, false)
 	button
+		display inline
 		background none
 		color currentColor
 		font-size 1em
@@ -88,12 +105,15 @@ button.header__toggle
 	border-radius 6px
 	transform translate(-50%, -100% - 6rem)
 	transform translate(-50%, -3px)
-	// transition transform 200ms 500ms ease-in-out
 	
 	p
 		font-weight 500
 		text-align center
 		color $gray-light
+		set-type-size(small, false)
+		line-height 1.4
+		+mq('bp-3')
+			set-type-size(medium, false)
 	
 	strong
 		color $white

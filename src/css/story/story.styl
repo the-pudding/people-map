@@ -3,6 +3,7 @@ body
 	color $white
 	font-weight 400
 	font-family $sans
+	overflow hidden
 
 main
 	width 100%
@@ -18,11 +19,17 @@ main
 	left 0
 	bottom 0
 	right auto
+	transform translate(100%, 0%)
+	+mq('bp-3')
+		transform translate(0)
 	a
 		border none
 
 .mapboxgl-ctrl-bottom-left
-	transform translateY(-75%)
+	transform translate(32.5%, 0)
+	+mq('bp-3')
+		transform translate(0, -75%)
+		
 	a
 		border none
 
@@ -32,14 +39,20 @@ main
 	font-family $sans
 	set-type-size(small, true)
 	line-height 1.5
-	max-width 20rem
+	max-width 21rem
 	padding 0.75rem
 	border-radius 6px
 	position fixed
 	bottom 0
 	top auto
-	left 50%
-	transform translate(-50%, 3px)
+	right 0
+	display none
+	&.is-visible
+		display block
+	+mq('bp-6')
+		left 50%
+		right auto
+		transform translate(-50%, 3px)
 	strong
 		font-weight 700
 		color $secondary

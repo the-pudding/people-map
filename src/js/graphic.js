@@ -1,5 +1,9 @@
 /* global d3 mapboxgl */
+import truncate from './utils/truncate';
+
+const $main = d3.select('main');
 const $header = d3.select('header');
+const $footer = d3.select('footer');
 const $micro = d3.select('.header__micro');
 const $buttonUp = $header.select('.header__toggle');
 const $buttonDown = $micro.select('.micro__toggle');
@@ -8,6 +12,8 @@ const $marker = d3.select('#marker');
 const $about = d3.select('#about');
 const $buttonAbout = d3.select('.btn--about');
 const $filterUl = d3.select('.filter-list');
+
+const BP = 960;
 
 const CATS = [
   { id: 'all', text: 'Show All' },
@@ -22,6 +28,7 @@ const CATS = [
 ];
 
 const LAYER_GROUPS = ['med', 'med-small', 'small'];
+let touch = false;
 let headerDone = false;
 let map = null;
 let marker = null;
@@ -62,14 +69,21 @@ function updateMarker(feature) {
   const { extract, name_clean } = feature.properties;
   if (currentPerson !== name_clean) {
     currentPerson = name_clean;
-    const index = findHighlight(extract);
-    let html = extract;
+
+    const text = truncate({
+      text: extract,
+      chars: mobile ? 150 : 200,
+      clean: true,
+      ellipses: true,
+    });
+    const index = findHighlight(text);
+    let html = text;
     if (index) {
-      const before = extract.substring(0, index);
-      const after = extract.substring(index, extract.length);
+      const before = text.substring(0, index);
+      const after = text.substring(index, text.length);
       html = `<strong>${before}</strong>${after}`;
     }
-    $marker.html(html);
+    $marker.html(html).classed('is-visible', true);
   }
   // marker.setLngLat([lng, lat]).addTo(map);
 }
@@ -83,11 +97,6 @@ function hideHeader() {
   headerDone = true;
   $header.classed('is-visible', false);
   $micro.classed('is-visible', true);
-}
-
-function toggleFilter() {
-  const visible = $filterUl.classed('is-visible');
-  $filterUl.classed('is-visible', !visible);
 }
 
 function toggleAbout() {
@@ -106,8 +115,24 @@ function handleMove(e) {
   }
 }
 
+function handleMarkerTap() {
+  $marker.classed('is-visible', false);
+}
+
 function resize() {
-  mobile = false;
+  mobile = $main.node().offsetWidth < BP;
+  touch = d3.select('body').classed('is-mobile');
+  if (mobile) {
+    const h = $footer.node().offsetHeight;
+    const w = $footer.node().offsetWidth;
+    $marker.style('width', `${w}px`).style('bottom', `${h}px`);
+  } else {
+    $marker.style('bottom', `0`);
+    $marker.classed('is-visible', true);
+  }
+  if (touch) {
+    $marker.select('strong').text('Tap');
+  }
 }
 
 function swapText(id) {
@@ -156,7 +181,12 @@ function setupUI() {
   // $buttonFilter.on('click', toggleFilter);
   $about.on('click', toggleAbout);
   $buttonAbout.on('click', toggleAbout);
-  map.on('mousemove', handleMove);
+  map.on(touch ? 'touchend' : 'mousemove', handleMove);
+
+  if (touch) {
+    $marker.on('click', handleMarkerTap);
+  }
+
   d3.timeout(() => {
     if (!headerDone) hideHeader();
   }, 10000);
@@ -164,28 +194,12 @@ function setupUI() {
 
 function setupMarker() {
   marker = new mapboxgl.Marker($marker.node());
-  const h = d3.select('footer').node().offsetHeight;
-  const b = mobile ? h : 0;
-  $marker.style('bottom', `${b}px`);
-}
-
-function setupFilter() {
-  const h = d3.select('footer').node().offsetHeight;
-  $filterUl
-    .style('bottom', `${h}px`)
-    .selectAll('li')
-    .data(CATS)
-    .join('li')
-    .append('button')
-    .text(d => d.text)
-    .on('click', updateFilter);
 }
 
 function init() {
   setupMap();
   setupUI();
-  setupMarker();
-  // setupFilter();
+  resize();
 }
 
 export default { init, resize };

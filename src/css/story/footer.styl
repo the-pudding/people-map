@@ -10,7 +10,7 @@ footer
 	font-weight 500
 	padding 0.5rem
 	border-radius 6px
-	transform translateY(3px)
+	transform translate(3px, 3px)
 
 	p
 		margin 0
@@ -21,9 +21,12 @@ footer
 	align-items center
 
 .key__description
-	max-width 8rem
+	max-width 7.25rem
 	text-align right
 	line-height 1.2
+	display none
+	+mq('bp-3')
+		display block
 
 .key__figure
 	display flex
@@ -31,7 +34,7 @@ footer
 
 	p
 		text-transform uppercase
-		max-width 3rem
+		max-width 2.75rem
 		line-height 1.2
 		font-weight 400
 		&:first-of-type
