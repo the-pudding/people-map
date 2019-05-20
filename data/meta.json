@@ -1,12 +1,12 @@
 {
-	"title": "Title Case Hed Goes Here",
-	"description": "Sentence case dek goes down here. Modify these in data/meta.json.",
+	"title": "A People Map of the US",
+	"description": "Where city names are replaced by their most Wikipedia’ed resident.",
 	"site": "https://pudding.cool",
 	"siteName": "The Pudding",
-	"url": "https://pudding.cool/year/month/name/",
+	"url": "https://pudding.cool/2019/05/people-map/",
 	"keywords": "tk",
-	"imgFacebook": "https://pudding.cool/year/month/name/assets/social/social-facebook.jpg",
-	"imgTwitter": "https://pudding.cool/year/month/name/assets/social/social-twitter.jpg",
+	"imgFacebook": "https://pudding.cool/2019/05/people-map/assets/social/social-facebook.jpg",
+	"imgTwitter": "https://pudding.cool/2019/05/people-map/assets/social/social-twitter.jpg",
 	"author": {
 		"name": "Matt Daniels",
 		"url": "https://pudding.cool/author/matt-daniels",
