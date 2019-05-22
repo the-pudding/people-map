@@ -30,12 +30,14 @@ function findHighlight(text) {
   const wasAn = text.indexOf(' was an ');
   const isThe = text.indexOf(' is the ');
   const wasThe = text.indexOf(' was the ');
+  const benny = text.indexOf(' designed the flag of Alaska');
   if (isA > -1 && isA < max) return isA;
   if (isAn > -1 && isAn < max) return isAn;
   if (wasA > -1 && wasA < max) return wasA;
   if (wasAn > -1 && wasAn < max) return wasAn;
   if (isThe > -1 && isThe < max) return isThe;
   if (wasThe > -1 && wasThe < max) return wasThe;
+  if (benny > -1 && benny < max) return benny;
   return false;
 }
 
@@ -43,16 +45,17 @@ function updateInfo(feature) {
   // const [lng, lat] = feature.geometry.coordinates;
   const { extract, name } = feature.properties;
   if (currentPerson !== name) {
+    const extractClean = extract.replace(/,,/g, ',');
     currentPerson = name;
 
     const text = mobile
       ? truncate({
-          text: extract,
+          text: extractClean,
           chars: 150,
           clean: true,
           ellipses: true,
         })
-      : extract;
+      : extractClean;
     const index = findHighlight(text);
     let html = text;
     if (index) {
