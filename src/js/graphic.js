@@ -8,45 +8,19 @@ const $micro = d3.select('.header__micro');
 const $buttonNote = $header.select('.header__note button');
 const $buttonUp = $header.select('.header__toggle');
 const $buttonDown = $micro.select('.micro__toggle');
-// const $buttonFilter = d3.select('.footer__filter');
-const $marker = d3.select('#marker');
+const $info = d3.select('#info');
 const $about = d3.select('#about');
 const $buttonAbout = d3.select('.btn--about');
-const $filterUl = d3.select('.filter-list');
 
 const BP = 960;
-
-const CATS = [
-  { id: 'all', text: 'Show All' },
-  { id: 'cat_filmtv', text: 'Film/TV' },
-  { id: 'cat_sports', text: 'Sports' },
-  { id: 'cat_music', text: 'Music' },
-  { id: 'cat_culture', text: 'Culture' },
-  { id: 'cat_politics', text: 'Politics' },
-  { id: 'cat_crime', text: 'Crime' },
-  { id: 'cat_lawandorder', text: 'Law & Order' },
-  { id: 'cat_misc', text: 'Misc' },
-];
+const FRESH = true;
 
 const LAYER_GROUPS = ['med', 'med-small', 'small'];
 let touch = false;
 let headerDone = false;
 let map = null;
-let marker = null;
 let mobile = false;
 let currentPerson = null;
-
-function updateFilter(d) {
-  LAYER_GROUPS.forEach(layer => {
-    if (d.id === 'all') map.setFilter(layer, null);
-    else map.setFilter(layer, ['==', d.id, 'TRUE']);
-  });
-
-  if (d.id === 'all') map.setFilter('people-map-4ngixe', null);
-  else map.setFilter('people-map-4ngixe', ['==', d.id, 'TRUE']);
-
-  $filterUl.classed('is-visible', false);
-}
 
 function findHighlight(text) {
   const max = 80;
@@ -65,18 +39,20 @@ function findHighlight(text) {
   return false;
 }
 
-function updateMarker(feature) {
+function updateInfo(feature) {
   // const [lng, lat] = feature.geometry.coordinates;
-  const { extract, name_clean } = feature.properties;
-  if (currentPerson !== name_clean) {
-    currentPerson = name_clean;
+  const { extract, name } = feature.properties;
+  if (currentPerson !== name) {
+    currentPerson = name;
 
-    const text = truncate({
-      text: extract,
-      chars: mobile ? 150 : 200,
-      clean: true,
-      ellipses: true,
-    });
+    const text = mobile
+      ? truncate({
+          text: extract,
+          chars: 150,
+          clean: true,
+          ellipses: true,
+        })
+      : extract;
     const index = findHighlight(text);
     let html = text;
     if (index) {
@@ -84,9 +60,8 @@ function updateMarker(feature) {
       const after = text.substring(index, text.length);
       html = `<strong>${before}</strong>${after}`;
     }
-    $marker.html(html).classed('is-visible', true);
+    $info.html(html).classed('is-visible', true);
   }
-  // marker.setLngLat([lng, lat]).addTo(map);
 }
 
 function showHeader() {
@@ -112,12 +87,12 @@ function handleMove(e) {
   );
   if (visible.length) {
     const feature = visible.shift();
-    updateMarker(feature);
+    updateInfo(feature);
   }
 }
 
-function handleMarkerTap() {
-  $marker.classed('is-visible', false);
+function handleInfoTap() {
+  $info.classed('is-visible', false);
 }
 
 function resize() {
@@ -126,13 +101,13 @@ function resize() {
   if (mobile) {
     const h = $footer.node().offsetHeight;
     const w = $footer.node().offsetWidth;
-    $marker.style('width', `${w}px`).style('bottom', `${h}px`);
+    $info.style('width', `${w}px`).style('bottom', `${h}px`);
   } else {
-    $marker.style('bottom', `0`);
-    $marker.classed('is-visible', true);
+    $info.style('bottom', `0`);
+    $info.classed('is-visible', true);
   }
   if (touch) {
-    $marker.select('strong').text('Tap');
+    $info.select('strong').text('Tap');
   }
 }
 
@@ -143,7 +118,7 @@ function swapText(id) {
     { 'font-scale': 1 },
     '\n',
     {},
-    ['get', 'city'],
+    ['get', 'place'],
     {
       'font-scale': 0.75,
       'text-font': ['literal', ['Roboto Mono Regular', 'Rubik Black']],
@@ -167,9 +142,12 @@ function setupMap() {
     'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p2Z3gxc2trMGNlaDQzb2NwamRtZW5reSJ9.EXF5uVYDl1EO1HLnWOsi5A';
   map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/dock4242/cjv6zwo1e3mdx1fpmeybn7crm?fresh=true',
+    style: `mapbox://styles/dock4242/cjv6zwo1e3mdx1fpmeybn7crm?fresh=${FRESH}`,
     center: [-98.57, 39.82],
     zoom: 3,
+    maxBounds: [[-180, 0], [-40, 75]],
+    maxZoom: 14,
+    minZoom: 3,
   });
   map.on('mousedown', hideHeader);
   map.on('touchstart', hideHeader);
@@ -179,23 +157,18 @@ function setupMap() {
 function setupUI() {
   $buttonUp.on('click', hideHeader);
   $buttonDown.on('click', showHeader);
-  // $buttonFilter.on('click', toggleFilter);
   $about.on('click', toggleAbout);
   $buttonAbout.on('click', toggleAbout);
   $buttonNote.on('click', toggleAbout);
   map.on(touch ? 'touchend' : 'mousemove', handleMove);
 
   if (touch) {
-    $marker.on('click', handleMarkerTap);
+    $info.on('click', handleInfoTap);
   }
 
   d3.timeout(() => {
     if (!headerDone) hideHeader();
   }, 10000);
-}
-
-function setupMarker() {
-  marker = new mapboxgl.Marker($marker.node());
 }
 
 function init() {
