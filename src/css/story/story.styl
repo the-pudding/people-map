@@ -22,6 +22,7 @@ main
 	// transform translate(100%, 0%)
 	+mq('bp-3')
 		transform translate(0)
+		right auto
 	a
 		border none
 
@@ -47,20 +48,20 @@ main
 	left 50%
 	width 100%
 	display none
-	max-width 25rem
 	transform translate(-50%, 3px)
 	z-index set-index(overlay)
 	cursor pointer
 	user-select none
-	// text-align center
+	&.is-center
+		text-align center
 	&.is-visible
 		display block
 	+mq('bp-4')
 		border-radius 6px
-		text-align left
+		max-width 21rem
 		padding-right 0.75rem
-		// transform translate(-50%, 3px)
-		// 	left 50%
+	+mq('bp-7')
+		max-width 25rem
 	strong
 		font-weight 700
 		color $secondary

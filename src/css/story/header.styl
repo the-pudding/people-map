@@ -100,7 +100,7 @@ button.header__toggle
 	top 0
 	left 50%
 	width 100%
-	max-width 30rem
+	max-width 40rem
 	background-color $off-black
 	font-family $sans
 	padding 0 1rem
@@ -152,16 +152,18 @@ button.micro__toggle
 		margin-left 12.5%
 
 a.logo
-	position absolute
-	top 1rem
-	left 1rem
+	position fixed
+	bottom 0.25rem
+	left 0.5rem
+	width 2rem
 	z-index set-index('overlay')
-	width 3rem
 	border none
 	opacity 1
-	display none
 	+mq('bp-5')
-		display block
+		width 3rem
+		top 1rem
+		bottom auto
+
 	.st0
 		fill $primary
 	.st1

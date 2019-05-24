@@ -63,7 +63,10 @@ function updateInfo(feature) {
       const after = text.substring(index, text.length);
       html = `<strong>${before}</strong>${after}`;
     }
-    $info.html(html).classed('is-visible', true);
+    $info
+      .html(html)
+      .classed('is-visible', true)
+      .classed('is-center', false);
   }
 }
 
