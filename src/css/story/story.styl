@@ -41,6 +41,7 @@ main
 	set-type-size(small, true)
 	line-height 1.5
 	padding 0.75rem
+	padding-right 2.5rem
 	position fixed
 	bottom 0
 	left 50%
@@ -48,13 +49,16 @@ main
 	display none
 	max-width 25rem
 	transform translate(-50%, 3px)
-	padding-bottom 2.75rem
+	z-index set-index(overlay)
+	cursor pointer
+	user-select none
 	// text-align center
 	&.is-visible
 		display block
 	+mq('bp-4')
 		border-radius 6px
 		text-align left
+		padding-right 0.75rem
 		// transform translate(-50%, 3px)
 		// 	left 50%
 	strong

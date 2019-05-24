@@ -47,15 +47,15 @@ function updateInfo(feature) {
   if (currentPerson !== name) {
     const extractClean = extract.replace(/,,/g, ',');
     currentPerson = name;
-
-    const text = mobile
-      ? truncate({
-          text: extractClean,
-          chars: 150,
-          clean: true,
-          ellipses: true,
-        })
-      : extractClean;
+    //  mobile
+    //   ? truncate({
+    //       text: extractClean,
+    //       chars: 150,
+    //       clean: true,
+    //       ellipses: true,
+    //     })
+    //   :
+    const text = extractClean;
     const index = findHighlight(text);
     let html = text;
     if (index) {
@@ -100,7 +100,6 @@ function handleInfoTap() {
 
 function resize() {
   mobile = $main.node().offsetWidth < BP;
-  touch = d3.select('body').classed('is-mobile');
   // if (mobile) {
   //   const h = $footer.node().offsetHeight;
   //   const w = $footer.node().offsetWidth;
@@ -164,10 +163,7 @@ function setupUI() {
   $buttonAbout.on('click', toggleAbout);
   $buttonNote.on('click', toggleAbout);
   map.on(touch ? 'touchend' : 'mousemove', handleMove);
-
-  if (touch) {
-    $info.on('touchstart', handleInfoTap);
-  }
+  if (touch) $info.on('touchstart', handleInfoTap);
 
   d3.timeout(() => {
     if (!headerDone) hideHeader();
@@ -175,6 +171,7 @@ function setupUI() {
 }
 
 function init() {
+  touch = d3.select('body').classed('is-mobile');
   setupMap();
   setupUI();
   resize();
