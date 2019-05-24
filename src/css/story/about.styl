@@ -12,7 +12,7 @@
 		display block
 
 	.about__inner
-		padding 2rem 1rem 1rem 1rem
+		padding 1rem
 		background-color $bg
 		position absolute
 		top 50%
@@ -23,6 +23,12 @@
 		border-radius 6px
 		// box-shadow 0 0 2px 1px $primary
 		border 2px solid $primary
+
+	p:first-of-type
+		margin-top 0
+	p:last-of-type
+		margin-bottom 0
+
 		
 	h4
 		font-weight 500
@@ -30,7 +36,9 @@
 	a
 		font-weight 500
 	p
-		set-type-size(small, true)
+		set-type-size(x-small, true)
+		+mq('bp-4')
+			set-type-size(small, true)
 
 	.btn--about
 		position absolute

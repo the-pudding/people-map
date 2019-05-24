@@ -101,14 +101,14 @@ function handleInfoTap() {
 function resize() {
   mobile = $main.node().offsetWidth < BP;
   touch = d3.select('body').classed('is-mobile');
-  if (mobile) {
-    const h = $footer.node().offsetHeight;
-    const w = $footer.node().offsetWidth;
-    $info.style('width', `${w}px`).style('bottom', `${h}px`);
-  } else {
-    $info.style('bottom', `0`);
-    $info.classed('is-visible', true);
-  }
+  // if (mobile) {
+  //   const h = $footer.node().offsetHeight;
+  //   const w = $footer.node().offsetWidth;
+  //   $info.style('width', `${w}px`).style('bottom', `${h}px`);
+  // } else {
+  // $info.style('bottom', `0`);
+  if (!mobile) $info.classed('is-visible', true);
+  // }
   if (touch) {
     $info.select('strong').text('Tap');
   }
@@ -166,7 +166,7 @@ function setupUI() {
   map.on(touch ? 'touchend' : 'mousemove', handleMove);
 
   if (touch) {
-    $info.on('click', handleInfoTap);
+    $info.on('touchstart', handleInfoTap);
   }
 
   d3.timeout(() => {

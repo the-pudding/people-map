@@ -16,17 +16,18 @@ main
 
 .mapboxgl-ctrl-bottom-right
 	position fixed
-	left 0
+	// left 1.5rem
 	bottom 0
-	right auto
-	transform translate(100%, 0%)
+	// right auto
+	// transform translate(100%, 0%)
 	+mq('bp-3')
 		transform translate(0)
 	a
 		border none
 
 .mapboxgl-ctrl-bottom-left
-	transform translate(32.5%, 0)
+	// left 2rem
+	// transform translate(32.5%, 5%)
 	+mq('bp-3')
 		transform translate(0, -75%)
 		
@@ -39,20 +40,23 @@ main
 	font-family $sans
 	set-type-size(small, true)
 	line-height 1.5
-	max-width 21rem
 	padding 0.75rem
-	border-radius 6px
 	position fixed
 	bottom 0
-	top auto
-	right 0
+	left 50%
+	width 100%
 	display none
+	max-width 25rem
+	transform translate(-50%, 3px)
+	padding-bottom 2.75rem
+	// text-align center
 	&.is-visible
 		display block
-	+mq('bp-6')
-		left 50%
-		right auto
-		transform translate(-50%, 3px)
+	+mq('bp-4')
+		border-radius 6px
+		text-align left
+		// transform translate(-50%, 3px)
+		// 	left 50%
 	strong
 		font-weight 700
 		color $secondary
