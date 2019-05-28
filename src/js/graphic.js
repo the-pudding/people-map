@@ -42,19 +42,10 @@ function findHighlight(text) {
 }
 
 function updateInfo(feature) {
-  // const [lng, lat] = feature.geometry.coordinates;
   const { extract, name } = feature.properties;
   if (currentPerson !== name) {
     const extractClean = extract.replace(/,,/g, ',');
     currentPerson = name;
-    //  mobile
-    //   ? truncate({
-    //       text: extractClean,
-    //       chars: 150,
-    //       clean: true,
-    //       ellipses: true,
-    //     })
-    //   :
     const text = extractClean;
     const index = findHighlight(text);
     let html = text;
@@ -103,17 +94,8 @@ function handleInfoTap() {
 
 function resize() {
   mobile = $main.node().offsetWidth < BP;
-  // if (mobile) {
-  //   const h = $footer.node().offsetHeight;
-  //   const w = $footer.node().offsetWidth;
-  //   $info.style('width', `${w}px`).style('bottom', `${h}px`);
-  // } else {
-  // $info.style('bottom', `0`);
   if (!mobile) $info.classed('is-visible', true);
-  // }
-  if (touch) {
-    $info.select('strong').text('Tap');
-  }
+  if (touch) $info.select('strong').text('Tap');
 }
 
 function swapText(id) {

@@ -170,7 +170,7 @@ a.logo
 		fill darken($primary, 25)
 
 .btn--about
-	z-index set-index('overlay')
+	z-index set-index('overlay') + 1
 	position absolute
 	top 1rem
 	right 1rem
@@ -184,7 +184,7 @@ a.logo
 	border 2px solid $primary
 	display none
 	+mq('bp-5')
-		dislpay block 
+		display block 
 
 header .key
 	+mq('bp-6')

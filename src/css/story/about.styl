@@ -40,13 +40,23 @@
 		+mq('bp-4')
 			set-type-size(small, true)
 
-	.btn--about
-		position absolute
-		top 1rem
-		right 1rem
+	.btn--close
+		background-color $off-black
+		color $primary
+		font-weight 700
+		line-height 1
 		width 2rem
 		height 2rem
 		border-radius 50%
+		border 2px solid $primary
+		position absolute
+		top 0rem
+		right 0rem
+		width 2rem
+		height 2rem
+		border-radius 50%
+		transform translate(50%, -50%)
+		
 		svg
 			stroke $primary
 			width 1rem
