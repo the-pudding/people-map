@@ -4,7 +4,7 @@
 	"site": "https://pudding.cool",
 	"siteName": "The Pudding",
 	"url": "https://pudding.cool/2019/05/people-map/",
-	"keywords": "tk",
+	"keywords": "people, us, wikipedia, famous, city, town",
 	"imgFacebook": "https://pudding.cool/2019/05/people-map/assets/social/social-facebook.jpg",
 	"imgTwitter": "https://pudding.cool/2019/05/people-map/assets/social/social-twitter.jpg",
 	"author": {
@@ -18,7 +18,7 @@
 	},
 	"author3": {
 		"name": "Angela Replica",
-		"url": "https://pudding.cool/author/angela-replica"
+		"url": "https://pudding.cool/"
 	},
 	"analytics": "UA-90567923-1",
 	"lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis neque sit amet sollicitudin vehicula. Maecenas fringilla mi non lacus mattis elementum. Curabitur dignissim faucibus justo."
