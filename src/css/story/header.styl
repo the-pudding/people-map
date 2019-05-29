@@ -155,15 +155,26 @@ a.logo
 	position fixed
 	bottom 0.25rem
 	left 0.5rem
-	width 2rem
+	width 9rem
 	z-index set-index('overlay')
 	border none
 	opacity 1
 	+mq('bp-5')
-		width 3rem
-		top 1rem
+		width 9rem
+		top 0.5rem
 		bottom auto
 
+	span
+		set-type-size(x-small, false)
+		text-shadow 0 0 3px $bg
+		// text-transform uppercase
+		font-weight 600
+		line-height 1
+		margin 0
+		transform translate(0.25rem, -50%)
+		display inline-block
+		color $gray-light
+		// text-transform capitalize
 	.st0
 		fill $primary
 	.st1
