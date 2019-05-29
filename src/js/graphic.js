@@ -126,7 +126,7 @@ function addLocation() {
 
 function setupMap() {
   mapboxgl.accessToken =
-    'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p2Z3gxc2trMGNlaDQzb2NwamRtZW5reSJ9.EXF5uVYDl1EO1HLnWOsi5A';
+    'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p3OWdtdGx0MjJ2ZjRibDlmeTFjZXVrMCJ9.6G8jitkvvjc9bl4v5OQmrw';
   map = new mapboxgl.Map({
     container: 'map',
     style: `mapbox://styles/dock4242/cjv6zwo1e3mdx1fpmeybn7crm?fresh=${FRESH}`,
