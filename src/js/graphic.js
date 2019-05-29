@@ -13,7 +13,7 @@ const $about = d3.select('#about');
 const $buttonAbout = d3.select('.btn--about');
 
 const BP = 960;
-const FRESH = true;
+const FRESH = false;
 
 const LAYER_GROUPS = ['med', 'med-small', 'small'];
 let touch = false;
