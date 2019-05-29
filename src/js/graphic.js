@@ -22,6 +22,12 @@ let map = null;
 let mobile = false;
 let currentPerson = null;
 
+const tokens = [
+  'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p3OWdtdGx0MjJ2ZjRibDlmeTFjZXVrMCJ9.6G8jitkvvjc9bl4v5OQmrw',
+  'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p3OWdvaWRhMGFveDRhcWpjMWo0dzI5NCJ9.7BxFm5leUso-UFdTbZLMOw',
+  'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p3OWdwMWdqMHhpMzN5bG1mbGRpczdxbyJ9.F8ViUIiK1CDkc4FT1xG-6w',
+];
+
 function findHighlight(text) {
   const max = 80;
   const isA = text.indexOf(' is a ');
@@ -125,8 +131,9 @@ function addLocation() {
 }
 
 function setupMap() {
-  mapboxgl.accessToken =
-    'pk.eyJ1IjoiZG9jazQyNDIiLCJhIjoiY2p3OWdtdGx0MjJ2ZjRibDlmeTFjZXVrMCJ9.6G8jitkvvjc9bl4v5OQmrw';
+  const r = Math.floor(Math.random() * tokens.length);
+  mapboxgl.accessToken = tokens[r];
+
   map = new mapboxgl.Map({
     container: 'map',
     style: `mapbox://styles/dock4242/cjv6zwo1e3mdx1fpmeybn7crm?fresh=${FRESH}`,
