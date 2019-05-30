@@ -56,14 +56,19 @@ function updateInfo(feature) {
     const index = findHighlight(text);
     let html = text;
     if (index) {
+      const base = 'https://en.wikipedia.org/wiki/';
+      const link = encodeURIComponent(name.replace(/ /g, '_'));
+      const href = `${base}${link}`;
       const before = text.substring(0, index);
       const after = text.substring(index, text.length);
       html = `<strong>${before}</strong>${after}`;
+      $info
+        .select('a')
+        .attr('href', href)
+        .classed('is-visible', true);
     }
-    $info
-      .html(html)
-      .classed('is-visible', true)
-      .classed('is-center', false);
+    $info.select('span').html(html);
+    $info.classed('is-visible', true).classed('is-center', false);
   }
 }
 
