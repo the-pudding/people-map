@@ -136,7 +136,7 @@ function setupMap() {
 
   map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/dock4242/cjwa0f8mj0l421clg3rggkz84',
+    style: 'mapbox://styles/dock4242/cjwamoybp15kf1cqk4uhe3s6y',
     center: [-98.57, 39.82],
     zoom: 3,
     maxBounds: [[-180, 0], [-40, 75]],
