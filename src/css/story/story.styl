@@ -44,7 +44,7 @@ main
 	set-type-size(small, true)
 	line-height 1.5
 	padding 0.75rem
-	padding-right 2.5rem
+	padding-right 2rem
 	position fixed
 	bottom 0
 	left 50%
@@ -77,7 +77,13 @@ main
 		svg
 			height 14px
 			width 14px
-
+	.feather-x
+		position absolute
+		bottom 0.5rem
+		right 0.5rem
+		width 1rem
+		+mq('bp-4')
+			display none
 
 .key
 	margin 0 auto
