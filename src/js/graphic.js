@@ -151,6 +151,8 @@ function setupMap() {
   map.on('mousedown', hideHeader);
   map.on('touchstart', hideHeader);
   map.on('load', addLocation);
+
+  map.addControl(new mapboxgl.NavigationControl({ showCompass: false }));
 }
 
 function setupUI() {
