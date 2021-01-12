@@ -91,8 +91,8 @@ function toggleAbout() {
 function handleMove(e) {
   const features = map.queryRenderedFeatures(e.point);
   const visible = features.filter(
-    d => d.layer.layout && d.layer.layout.visibility === 'visible'
-  );
+    d => d.layer.layout && d.layer.type === 'symbol'
+	);
   if (visible.length) {
     const feature = visible.shift();
     updateInfo(feature);
